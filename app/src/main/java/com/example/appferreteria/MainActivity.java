@@ -1,6 +1,6 @@
 package com.example.appferreteria;
 
-import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,10 +46,17 @@ public class MainActivity extends AppCompatActivity {
             gridLayout.addView(card);
         }
 
-        navBottom.setOnItemSelectedListener(item ->{
-            switch (item.getItemId()){
-
+        navBottom.setOnItemSelectedListener(item -> {
+            if(item.getItemId() == R.id.nav_home){
+                return true;
+            }else if(item.getItemId() == R.id.nav_user){
+                Intent intent = new Intent(MainActivity.this, UsuarioActivity.class);
+                startActivity(intent);
+                return true;
+            }else{
+                return false;
             }
         });
+
     }
 }
