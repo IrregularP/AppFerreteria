@@ -36,39 +36,15 @@
         app:layout_constraintBottom_toBottomOf="@id/nav_top"
         android:layout_marginStart="25dp"/>
 
-    <ScrollView
-        android:background="@color/white"
-        android:id="@+id/main_scroll"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@id/nav_top"
         app:layout_constraintBottom_toTopOf="@id/nav_bottom"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-        
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <GridLayout
-                android:id="@+id/menus"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alignmentMode="alignMargins"
-                android:columnCount="1"
-                android:padding="8dp"
-                android:orientation="vertical"
-                android:useDefaultMargins="true">
-
-
-            </GridLayout>
-
-        </LinearLayout>
-        
-    </ScrollView>
-
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_bottom"

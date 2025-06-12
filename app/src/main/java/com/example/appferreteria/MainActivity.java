@@ -1,62 +1,49 @@
 package com.example.appferreteria;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.GridLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
-    GridLayout gridLayout;
+public class MainActivity extends AppCompatActivity{
     BottomNavigationView navBottom;
-    String[] nombres = {
-            "Venta", "Inventario", "Clientes", "Proveedores",
-            "Cuentas Por Cobrar", "Ventas Realizadas", "Estadisticas"
-    };
-    int[] imagenes = {
-            R.drawable.venta, R.drawable.inventario, R.drawable.cliente,
-            R.drawable.proveedor, R.drawable.cuentasporcobrar, R.drawable.ventasrealizadas,
-            R.drawable.estadisticas
-    };
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activitymain);
-        gridLayout = findViewById(R.id.menus);
-        navBottom = findViewById(R.id.nav_bottom);
+        setContentView(R.layout.login);
 
-        LayoutInflater inflater = LayoutInflater.from(this);
+        /*navBottom = findViewById(R.id.nav_bottom);
+        fragmentManager = getSupportFragmentManager();
 
-        for(int i = 0; i < nombres.length; i++){
-            View card = inflater.inflate(R.layout.item_card, gridLayout, false);
-
-            TextView textView = card.findViewById(R.id.textView);
-            ImageView imageView = card.findViewById(R.id.imageView);
-
-            textView.setText(nombres[i]);
-            imageView.setImageResource(imagenes[i]);
-
-            gridLayout.addView(card);
+        if(savedInstanceState == null){
+            loadFragment(new UsuarioFragment());
+            navBottom.setSelectedItemId(R.id.nav_user);
         }
 
         navBottom.setOnItemSelectedListener(item -> {
-            if(item.getItemId() == R.id.nav_home){
-                return true;
-            }else if(item.getItemId() == R.id.nav_user){
-                Intent intent = new Intent(MainActivity.this, UsuarioActivity.class);
-                startActivity(intent);
-                return true;
-            }else{
-                return false;
-            }
-        });
+            Fragment fragment = null;
 
+            if(item.getItemId() == R.id.nav_home){
+                fragment = new HomeFragment();
+            }else if(item.getItemId() == R.id.nav_user){
+                fragment = new UsuarioFragment();
+            }
+
+            if(fragment != null){
+                loadFragment(fragment);
+                return true;
+            }
+            return false;
+        });*/
+    }
+
+    private void loadFragment(Fragment fragment){
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
     }
 }
