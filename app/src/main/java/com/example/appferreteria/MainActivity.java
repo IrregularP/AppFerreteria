@@ -14,9 +14,9 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activitymain);
 
-        /*navBottom = findViewById(R.id.nav_bottom);
+        navBottom = findViewById(R.id.nav_bottom);
         fragmentManager = getSupportFragmentManager();
 
         if(savedInstanceState == null){
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity{
                 return true;
             }
             return false;
-        });*/
+        });
     }
 
     private void loadFragment(Fragment fragment){

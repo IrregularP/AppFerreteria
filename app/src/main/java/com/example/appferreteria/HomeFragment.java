@@ -14,13 +14,12 @@ public class HomeFragment extends Fragment {
     GridLayout gridLayout;
 
     String[] nombres = {
-            "Venta", "Inventario", "Clientes", "Proveedores",
-            "Cuentas Por Cobrar", "Ventas Realizadas", "Estadisticas"
+            "Inventario", "Proveedores",
+            "Cuentas Por Cobrar", "Estadisticas"
     };
 
     int[] imagenes = {
-            R.drawable.venta, R.drawable.inventario, R.drawable.cliente,
-            R.drawable.proveedor, R.drawable.cuentasporcobrar, R.drawable.ventasrealizadas,
+            R.drawable.inventario, R.drawable.proveedor, R.drawable.cuentasporcobrar,
             R.drawable.estadisticas
     };
 
@@ -38,6 +37,31 @@ public class HomeFragment extends Fragment {
 
             textView.setText(nombres[i]);
             imageView.setImageResource(imagenes[i]);
+
+            int seleccion = i;
+            card.setOnClickListener(v ->{
+                Fragment fragment = null;
+
+                switch (seleccion){
+                    case 0:
+                        fragment = new InventarioFragment();
+                        break;
+                    case 1:
+                        fragment = new ProveedoresFragment();
+                        break;
+                    case 2:
+                        fragment = new CuentasPorCobrarFragment();
+                        break;
+                    case 3:
+                        fragment = new EstadisticasFragment();
+                        break;
+                }
+
+                if(fragment != null){
+                    requireActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                }
+            });
 
             gridLayout.addView(card);
         }
