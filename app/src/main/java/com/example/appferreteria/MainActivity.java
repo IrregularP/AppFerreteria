@@ -1,5 +1,6 @@
 package com.example.appferreteria;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity{
 
         navBottom.setOnItemSelectedListener(item -> {
             Fragment fragment = null;
+
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 
             if(item.getItemId() == R.id.nav_home){
                 fragment = new HomeFragment();
