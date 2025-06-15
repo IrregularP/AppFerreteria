@@ -70,4 +70,6 @@ public class producto {
     public int getIdProveedor() {
         return idProveedor;
     }
+
+
 }
