@@ -27,6 +27,13 @@ public class LoginActivity extends AppCompatActivity {
         editContraseña = findViewById(R.id.TextContraseña);
         btnLogin = findViewById(R.id.btnLogin);
 
+        usuario UsuarioActivo = SessionManager.getUsuario(getApplicationContext());
+
+        if(UsuarioActivo != null){
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
+
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -45,10 +52,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean validarUsuario(String usuarioInput, String contraseñaInput){
+        //PONER LA LOGICA DEL API
         List<usuario> listUsuarios = usuariosFakeData.getUsuarios();
 
         for(usuario u : listUsuarios){
             if(u.getUsuario().equals(usuarioInput) && u.getContraseña().equals(contraseñaInput)){
+                SessionManager.guardarUsuario(getApplicationContext(), u);
                 return true;
             }
         }
