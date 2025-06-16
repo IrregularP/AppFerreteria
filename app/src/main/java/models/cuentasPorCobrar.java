@@ -1,6 +1,5 @@
 package models;
 
-import androidx.loader.app.LoaderManager;
 
 import java.time.LocalDate;
 
@@ -32,4 +31,21 @@ public class cuentasPorCobrar {
     public String getEstado(){
         return estado;
     }
+
+    public void setIdCuenta(int idCuenta){
+        this.idCuenta = idCuenta;
+    }
+
+    public void setIdVenta(int idVenta){
+        this.idVenta = idVenta;
+    }
+
+    public void setFechaInicio(LocalDate fechaInicio){
+        this.fechaInicio = fechaInicio;
+    }
+
+    public void setEstado(String estado){
+        this.estado = estado;
+    }
+
 }
