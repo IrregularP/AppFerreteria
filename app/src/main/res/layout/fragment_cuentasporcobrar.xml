@@ -1,11 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cuentas por cobrar layout"/>
+        android:orientation="vertical"
+        android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cuentas o Ventas a Crédito"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:id="@+id/BtnEliminarCuenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eliminar Cuenta"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"/>
+
+        <GridLayout
+            android:id="@+id/cuentas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alignmentMode="alignMargins"
+            android:columnCount="1"
+            android:padding="8dp"
+            android:orientation="vertical">
+        </GridLayout>
+    </LinearLayout>
+</ScrollView>

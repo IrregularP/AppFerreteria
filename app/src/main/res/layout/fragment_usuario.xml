@@ -4,6 +4,66 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <TextView
+        android:id="@+id/UsuarioConectadoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Usuario Conectado:"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="60dp"/>
+
+    <TextView
+        android:id="@+id/UsuarioConectado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/UsuarioConectadoText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text=""
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/RolUsuarioText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/UsuarioConectado"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Rol del Usuario:"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="60dp"/>
+
+    <TextView
+        android:id="@+id/RolUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RolUsuarioText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text=""
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/CerrarSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RolUsuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="60dp"
+        android:text="Cerrar Sesión"/>
+
+
+
         
 
 </androidx.constraintlayout.widget.ConstraintLayout>
