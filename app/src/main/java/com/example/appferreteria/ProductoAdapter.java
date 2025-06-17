@@ -19,7 +19,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         void onDetalleClick(producto producto);
     }
 
-    public ProductoAdapter(List<producto> productoList, ProductoClickListener listener) {
+        public ProductoAdapter(List<producto> productoList, ProductoClickListener listener) {
         this.productoList = productoList;
         this.listener = listener;
     }
@@ -27,12 +27,14 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     public static class ProductoViewHolder extends RecyclerView.ViewHolder {
         public TextView tvProductName;
         public TextView tvStock;
+        public TextView tvDetallePrecioUnitario;
         public Button btnDetalles;
 
         public ProductoViewHolder(View itemView) {
             super(itemView);
             tvProductName = itemView.findViewById(R.id.tvProductName);
             tvStock = itemView.findViewById(R.id.tvStock);
+            tvDetallePrecioUnitario = itemView.findViewById(R.id.tvDetallePrecioUnitario);
             btnDetalles = itemView.findViewById(R.id.btnDetalles);
         }
     }
@@ -49,6 +51,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         final producto prod = productoList.get(position);
         holder.tvProductName.setText(prod.getNombre());
         holder.tvStock.setText("Stock: " + prod.getStock());
+        holder.tvDetallePrecioUnitario.setText("Precio: $" + prod.getPrecioUnitario());
 
         holder.btnDetalles.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,12 +4,21 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 import models.producto;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import models.ApiService;
+import retrofit2.converter.gson.GsonConverterFactory;
+import com.example.appferreteria.ProductoAdapter;
 
 public class InventarioFragment extends Fragment implements ProductoAdapter.ProductoClickListener {
 
@@ -17,12 +26,42 @@ public class InventarioFragment extends Fragment implements ProductoAdapter.Prod
     private ProductoAdapter adapter;
     private List<producto> productoList;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_inventario, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerViewProducts);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://tudominio.com/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService = retrofit.create(ApiService.class);
+
+        Call<List<producto>> call = apiService.getDatos();
+
+        call.enqueue(new Callback<List<producto>>() {
+            @Override
+            public void onResponse(Call<List<producto>> call, Response<List<producto>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<producto> list = response.body();
+                    recyclerView = view.findViewById(R.id.recyclerViewProducts);
+                    ProductoAdapter.ProductoClickListener listener = null;
+                    ProductoAdapter adapter = new ProductoAdapter(list, listener);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<producto>> call, Throwable t) {
+                Log.e("API", "Error al obtener datos", t);
+            }
+        });
 
         // Puedes reemplazar este método con la llamada a tu API.
         productoList = obtenerProductos();
