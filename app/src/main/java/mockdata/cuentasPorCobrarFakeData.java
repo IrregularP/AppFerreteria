@@ -1,16 +1,20 @@
 package mockdata;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import models.cuentasPorCobrar;
 
 public class cuentasPorCobrarFakeData {
 
     public static List<cuentasPorCobrar> getCuentas(){
-        return List.of(
-                new cuentasPorCobrar(1, 1, LocalDate.of(2024, 12, 12), "Pendiente"),
-                new cuentasPorCobrar(2, 2, LocalDate.of(2023, 4, 13), "Pagado")
-        );
+        List<cuentasPorCobrar> cuentas = new ArrayList<>();
+
+        cuentas.add(new cuentasPorCobrar(159, 1234, LocalDate.of(2015, 8, 13), "Pendiente"));
+        cuentas.add(new cuentasPorCobrar(160, 5678, LocalDate.of(2012, 12, 7), "Pagado"));
+        cuentas.add(new cuentasPorCobrar(161, 9101, LocalDate.of(2010, 8, 15), "Pendiente"));
+
+        return cuentas;
     }
 
     public static void eliminarCuenta(int idCuenta){

@@ -14,13 +14,13 @@ public class HomeFragment extends Fragment {
     GridLayout gridLayout;
 
     String[] nombres = {
-            "Inventario", "Proveedores",
+            "Inventario", "Proveedores", "Categorías",
             "Cuentas Por Cobrar", "Estadisticas"
     };
 
     int[] imagenes = {
-            R.drawable.inventario, R.drawable.proveedor, R.drawable.cuentasporcobrar,
-            R.drawable.estadisticas
+            R.drawable.inventario, R.drawable.proveedor, R.drawable.categoria,
+            R.drawable.cuentasporcobrar, R.drawable.estadisticas
     };
 
     @Override
@@ -50,9 +50,12 @@ public class HomeFragment extends Fragment {
                         fragment = new ProveedoresFragment();
                         break;
                     case 2:
-                        fragment = new CuentasPorCobrarFragment();
+                        fragment = new CategoriaFragment();
                         break;
                     case 3:
+                        fragment = new CuentasPorCobrarFragment();
+                        break;
+                    case 4:
                         fragment = new EstadisticasFragment();
                         break;
                 }

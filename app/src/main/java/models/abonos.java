@@ -29,4 +29,20 @@ public class abonos {
     public double getMonto(){
         return monto;
     }
+
+    public void setIdAbono(int idAbono) {
+        this.idAbono = idAbono;
+    }
+
+    public void setIdCuentaPorCobrar(int idCuentaPorCobrar) {
+        this.idCuentaPorCobrar = idCuentaPorCobrar;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
 }

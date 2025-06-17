@@ -42,4 +42,28 @@ public class comprasProducto {
     public double getPrecioCompra(){
         return precioCompra;
     }
+
+    public void setIdCompra(int idCompra) {
+        this.idCompra = idCompra;
+    }
+
+    public void setFechaCompra(LocalDate fechaCompra) {
+        this.fechaCompra = fechaCompra;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public void setPrecioCompra(double precioCompra) {
+        this.precioCompra = precioCompra;
+    }
+
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    public void setCantidadAdquirida(int cantidadAdquirida) {
+        this.cantidadAdquirida = cantidadAdquirida;
+    }
 }
