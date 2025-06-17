@@ -32,7 +32,7 @@
             android:text="Stock: 0"
             android:layout_marginEnd="8dp"/>
         <TextView
-            android:id="@+id/tvDetallePrecioUnitarioo"
+            android:id="@+id/tvDetallePrecioUnitario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="precio: 0"
