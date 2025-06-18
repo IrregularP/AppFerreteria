@@ -16,4 +16,12 @@ public class categoria {
     public String getNombre(){
         return nombre;
     }
+
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }

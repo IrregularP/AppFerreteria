@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean validarUsuario(String usuarioInput, String contraseñaInput){
         //PONER LA LOGICA DEL API
-        List<usuario> listUsuarios = usuariosFakeData.getUsuarios();
+            List<usuario> listUsuarios = usuariosFakeData.getUsuarios();
 
         for(usuario u : listUsuarios){
             if(u.getUsuario().equals(usuarioInput) && u.getContraseña().equals(contraseñaInput)){
