@@ -1,80 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/tvDetalleNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre: "/>
+            android:text="Nombre: "
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvDetalleDescripcion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descripción: "/>
+            android:text="Descripción: "
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvDetalleCodigoBarras"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Código de Barras: "/>
+            android:text="Código de Barras: "
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvDetallePrecioSinIva"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Precio sin IVA: "/>
+            android:text="Precio sin IVA: "
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvDetallePrecioUnitario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Precio Unitario: "/>
+            android:text="Precio Unitario: "
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvDetallePorcentajeGanancia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Porcentaje Ganancia: "/>
+            android:text="Porcentaje Ganancia: "
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvDetalleIva"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="IVA: "/>
+            android:text="IVA: "
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvDetalleStock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Stock: "/>
+            android:text="Stock: "
+            android:textColor="@color/black"
+            android:background="@drawable/border_stock"
+            android:padding="2dp"/>
 
         <TextView
             android:id="@+id/tvDetalleCategoria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Categoría: "/>
+            android:text="Categoría: "
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvDetalleIdProveedor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ID Proveedor: "/>
+            android:text="ID Proveedor: "
+            android:textColor="@color/black"/>
         <LinearLayout
             android:id="@+id/botonesContenedor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="24dp">
+            android:layout_marginTop="24dp"
+            android:background="@color/white">
 
             <Button
                 android:id="@+id/btnModificarStock"

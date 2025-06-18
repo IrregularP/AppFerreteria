@@ -4,14 +4,16 @@
     android:layout_width="match_parent"
     android:layout_margin="8dp"
     android:layout_height="wrap_content"
-    card_view:cardElevation="4dp">
+    card_view:cardElevation="4dp"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:background="@color/white">
 
         <!-- Nombre del producto ocupa la mayor parte -->
         <TextView
@@ -21,6 +23,7 @@
             android:layout_height="wrap_content"
             android:text="Nombre del Producto"
             android:textSize="18sp"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:layout_marginEnd="8dp"/>
 
@@ -30,12 +33,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Stock: 0"
+            android:textColor="@color/black"
             android:layout_marginEnd="8dp"/>
         <TextView
             android:id="@+id/tvDetallePrecioUnitario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="precio: 0"
+            android:textColor="@color/black"
             android:layout_marginEnd="8dp"/>
 
         <!-- Botón de Detalles -->

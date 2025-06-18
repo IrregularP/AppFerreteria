@@ -71,5 +71,47 @@ public class producto {
         return idProveedor;
     }
 
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setCategoria(int categoria) {
+        this.categoria = categoria;
+    }
+
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
+    }
+
+    public void setPrecioSinIva(double precioSinIva) {
+        this.precioSinIva = precioSinIva;
+    }
+
+    public void setPorcentajeGanancia(double porcentajeGanancia) {
+        this.porcentajeGanancia = porcentajeGanancia;
+    }
+
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
+    }
+
+    public void setIva(double iva) {
+        this.iva = iva;
+    }
 }
