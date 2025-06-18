@@ -4,11 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
 flask-jwt-extended = "*"
 mysql-connector-python = "*"
 werkzeug = "*"
 flask-cors = "*"
+flask = "*"
 
 [dev-packages]
 

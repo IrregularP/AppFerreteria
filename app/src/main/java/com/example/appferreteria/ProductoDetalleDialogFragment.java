@@ -3,20 +3,52 @@ package com.example.appferreteria;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import models.producto;
 import models.usuario;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import models.ApiService;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class ProductoDetalleDialogFragment extends DialogFragment {
+
+    private OnProductoActualizadoListener listener;
+
+
+
+
+
+    public interface OnProductoActualizadoListener {
+        void onProductoActualizado();
+    }
+
+    public void setOnProductoActualizadoListener(OnProductoActualizadoListener listener) {
+        this.listener = listener;
+    }
+
+
+
+
 
     @Override
     public void onStart() {
@@ -29,6 +61,8 @@ public class ProductoDetalleDialogFragment extends DialogFragment {
     }
 
     // Constantes para los argumentos
+
+    ApiService apiService;
     private static final String ARG_ID = "idProducto";
     private static final String ARG_NOMBRE = "nombre";
     private static final String ARG_DESCRIPCION = "descripcion";
@@ -64,6 +98,14 @@ public class ProductoDetalleDialogFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:5000/productos/") // Ajusta al URL real
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        apiService = retrofit.create(ApiService.class);
+
         View view = inflater.inflate(R.layout.dialog_producto_detalle, container, false);
 
         TextView tvNombre = view.findViewById(R.id.tvDetalleNombre);
@@ -76,6 +118,10 @@ public class ProductoDetalleDialogFragment extends DialogFragment {
         TextView tvStock = view.findViewById(R.id.tvDetalleStock);
         TextView tvCategoria = view.findViewById(R.id.tvDetalleCategoria);
         TextView tvIdProveedor = view.findViewById(R.id.tvDetalleIdProveedor);
+        Button btnEliminarProducto = view.findViewById(R.id.btnEliminarProducto);
+        Button btnModificarStock = view.findViewById(R.id.btnModificarStock);
+
+
 
         Bundle args = getArguments();
         if (args != null) {
@@ -91,9 +137,12 @@ public class ProductoDetalleDialogFragment extends DialogFragment {
             tvIdProveedor.setText("ID Proveedor: " + args.getInt(ARG_ID_PROVEEDOR));
         }
 
-        Button btnModificarStock = view.findViewById(R.id.btnModificarStock);
-        Button btnEliminarProducto = view.findViewById(R.id.btnEliminarProducto);
+
         LinearLayout botonesContenedor = view.findViewById(R.id.botonesContenedor);
+
+        btnModificarStock.setOnClickListener(v -> mostrarDialogoModificarStock(args.getInt(ARG_ID)));
+
+        btnEliminarProducto.setOnClickListener(v -> eliminarProductoConfirmado(args.getInt(ARG_ID)));
 
         usuario usuarioActual = SessionManager.getUsuario(getContext());
 
@@ -111,5 +160,61 @@ public class ProductoDetalleDialogFragment extends DialogFragment {
             btnEliminarProducto.setVisibility(View.VISIBLE);
         }
         return view;
+    }
+
+    private void mostrarDialogoModificarStock(int idProducto) {
+        EditText input = new EditText(getContext());
+        input.setHint("Nuevo stock");
+
+        new AlertDialog.Builder(getContext())
+                .setTitle("Modificar stock")
+                .setView(input)
+                .setPositiveButton("Actualizar", (dialog, which) -> {
+                    int nuevoStock = Integer.parseInt(input.getText().toString());
+                    Map<String, Integer> body = new HashMap<>();
+                    body.put("stock", nuevoStock);
+
+                    apiService.actualizarStock(idProducto, body).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Toast.makeText(getContext(), "Stock actualizado", Toast.LENGTH_SHORT).show();
+                            dismiss(); // cerrar modal
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Toast.makeText(getContext(), "Error al actualizar stock", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
+    private void eliminarProductoConfirmado(int idProducto) {
+        new AlertDialog.Builder(getContext())
+                .setTitle("¿Eliminar producto?")
+                .setMessage("Esta acción no se puede deshacer.")
+                .setPositiveButton("Eliminar", (dialog, which) -> {
+                    apiService.eliminarProducto(idProducto).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(getContext(), "Producto eliminado", Toast.LENGTH_SHORT).show();
+                                if (listener != null) listener.onProductoActualizado();
+                                dismiss(); // Cierra el modal
+                            } else {
+                                Toast.makeText(getContext(), "No se pudo eliminar el producto", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
+                            Log.e("API", "Error al eliminar producto", t);
+                        }
+                    });
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 }

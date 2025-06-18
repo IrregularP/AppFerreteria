@@ -19,6 +19,8 @@ import retrofit2.Retrofit;
 import models.ApiService;
 import retrofit2.converter.gson.GsonConverterFactory;
 import com.example.appferreteria.ProductoAdapter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class InventarioFragment extends Fragment implements ProductoAdapter.ProductoClickListener {
 
@@ -35,9 +37,13 @@ public class InventarioFragment extends Fragment implements ProductoAdapter.Prod
         recyclerView = view.findViewById(R.id.recyclerViewProducts);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://tudominio.com/api/")
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         ApiService apiService = retrofit.create(ApiService.class);
@@ -51,7 +57,7 @@ public class InventarioFragment extends Fragment implements ProductoAdapter.Prod
                     List<producto> list = response.body();
                     recyclerView = view.findViewById(R.id.recyclerViewProducts);
                     ProductoAdapter.ProductoClickListener listener = null;
-                    ProductoAdapter adapter = new ProductoAdapter(list, listener);
+                    ProductoAdapter adapter = new ProductoAdapter(list, InventarioFragment.this);
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
                 }
@@ -74,8 +80,8 @@ public class InventarioFragment extends Fragment implements ProductoAdapter.Prod
     // Método simulado para obtener productos. Reemplázalo por la llamada a tu API.
     private List<producto> obtenerProductos() {
         List<producto> list = new ArrayList<>();
-        list.add(new producto(1, "Martillo", "Martillo de acero", "123456789", 50.0, 60.0, 20.0, 12.0, 15, 1, 101));
-        list.add(new producto(2, "Taladro", "Taladro inalámbrico", "987654321", 150.0, 180.0, 20.0, 12.0, 10, 2, 102));
+        //list.add(new producto(1, "Martillo", "Martillo de acero", "123456789", 50.0, 60.0, 20.0, 12.0, 15, 1, 101));
+        //list.add(new producto(2, "Taladro", "Taladro inalámbrico", "987654321", 150.0, 180.0, 20.0, 12.0, 10, 2, 102));
         return list;
     }
 
@@ -85,4 +91,5 @@ public class InventarioFragment extends Fragment implements ProductoAdapter.Prod
         ProductoDetalleDialogFragment dialog = ProductoDetalleDialogFragment.newInstance(producto);
         dialog.show(getParentFragmentManager(), "ProductoDetalleDialogFragment");
     }
+
 }
