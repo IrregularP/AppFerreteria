@@ -34,7 +34,9 @@ public class CategoriaFragment extends Fragment {
 
         listaCategorias = obtenerCategorias();
         adapter = new CategoriaAdapter(listaCategorias, categoria -> {
-
+            ProductoPorCategoriaFragment fragment = ProductoPorCategoriaFragment.newInstance(categoria.getIdCategoria());
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null).commit();
         });
 
         recyclerView.setAdapter(adapter);
