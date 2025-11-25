@@ -2,6 +2,7 @@
 import mysql.connector
 from mysql.connector import Error
 from typing import List, Dict, Union, Optional
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # MySQL connection config
 DB_CONFIG = {
