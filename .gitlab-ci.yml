@@ -1,9 +1,10 @@
-image: python:3.9-slim
+image: python:3.10-slim
 
 stages:
   - build
   - lint
   - test
+  - security 
 
 cache:
   paths:
@@ -12,16 +13,18 @@ cache:
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
 
+# ---  BUILD ---
 setup_environment:
   stage: build
   script:
-    - echo "Iniciando instalación..."
     - python -m pip install --upgrade pip
     - pip install -r requirements.txt
   artifacts:
     paths:
       - .pip-cache/
+    expire_in: 1 hour
 
+# --- LINT (Calidad) ---
 check_quality:
   stage: lint
   script:
@@ -30,11 +33,23 @@ check_quality:
   dependencies:
     - setup_environment
 
+# ---TEST CON COBERTURA ---
 run_tests:
   stage: test
   script:
-    - pip install pytest
-    # AQUÍ ESTÁ EL CAMBIO: 'test/' en vez de 'tests/'
-    - pytest test/  
+    - pip install -r requirements.txt
+    - pip install pytest pytest-cov
+    - pytest --cov=. --cov-report term test/
+  coverage: '/(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'
   dependencies:
     - setup_environment
+
+# --- SEGURIDAD (SAST) ---
+include:
+  - template: Security/SAST.gitlab-ci.yml
+
+sast:
+  stage: security
+  variables:
+    SAST_EXCLUDED_ANALYZERS: "brakeman, flawfinder, kubesec, phpcs-security-audit, pmd-apex, security-code-scan, sobelow, spotbugs"
+  

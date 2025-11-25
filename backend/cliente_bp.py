@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from db import get_clientes, get_cliente, create_cliente, update_cliente, delete_cliente
+from db import get_clientes, get_cliente, create_cliente, update_cliente, delete_cliente, get_clientes_cdmexico, get_clientes_guadalajara
 
 cliente_bp = Blueprint('cliente', __name__)
 

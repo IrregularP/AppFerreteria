@@ -15,12 +15,12 @@ public class HomeFragment extends Fragment {
 
     String[] nombres = {
             "Inventario", "Proveedores", "Categorías",
-            "Cuentas Por Cobrar", "Estadísticas"
+            "Cuentas Por Cobrar"
     };
 
     int[] imagenes = {
             R.drawable.inventario, R.drawable.proveedor, R.drawable.categoria,
-            R.drawable.cuentasporcobrar, R.drawable.estadisticas
+            R.drawable.cuentasporcobrar
     };
 
     @Override
@@ -54,9 +54,6 @@ public class HomeFragment extends Fragment {
                         break;
                     case 3:
                         fragment = new CuentasPorCobrarFragment();
-                        break;
-                    case 4:
-                        fragment = new EstadisticasFragment();
                         break;
                 }
 
