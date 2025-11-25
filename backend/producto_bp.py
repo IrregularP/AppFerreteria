@@ -2,7 +2,8 @@ from flask import Blueprint, request, jsonify
 from db import (
     get_productos, get_producto, create_producto, update_producto, delete_producto,
     get_productos_stock_alto, get_productos_stock_bajo,
-    get_productos_cat1_stock_alto, get_productos_cat2_stock_bajo, get_productos_cat3_stock_medio
+    get_productos_cat1_stock_alto, get_productos_cat2_stock_bajo, get_productos_cat3_stock_medio,
+    get_productos_by_categoria
 )
 
 producto_bp = Blueprint('producto', __name__)
@@ -49,6 +50,14 @@ def delete(id_producto):
     if affected > 0:
         return jsonify({"message": "Producto deleted"}), 200
     return jsonify({"error": "Producto not found"}), 404
+
+@producto_bp.route('/categoria/<int:id_categoria>', methods=['GET'])
+def get_by_category(id_categoria):
+    productos = get_productos_by_categoria(id_categoria)
+    # Si devuelve None o lista vacía, devolvemos lista vacía []
+    if productos:
+        return jsonify(productos), 200
+    return jsonify([]), 200
 
 # Fragmented views
 @producto_bp.route('/stock-alto', methods=['GET'])

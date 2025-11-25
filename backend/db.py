@@ -117,6 +117,9 @@ def update_producto(id_producto: int, **kwargs) -> int:
 def delete_producto(id_producto: int) -> int:
     return execute_query("DELETE FROM producto WHERE id_producto = %s", (id_producto,))
 
+def get_productos_by_categoria(id_categoria: int) -> List[Dict]:
+    return execute_query("SELECT * FROM producto WHERE categoria = %s", (id_categoria,), fetch=True)
+
 # ========================= CATEGORIA CRUD =========================
 def get_categorias() -> List[Dict]:
     return execute_query("SELECT * FROM categoria", fetch=True)

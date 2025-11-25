@@ -43,4 +43,5 @@ def server_error(error):
     return jsonify({"error": "Internal server error"}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # '0.0.0.0' le dice a Flask: "Escucha a todo el mundo"
+    app.run(host='0.0.0.0', port=5000, debug=True)
