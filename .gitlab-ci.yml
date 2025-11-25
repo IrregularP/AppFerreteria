@@ -1,0 +1,40 @@
+image: python:3.9-slim
+
+stages:
+  - build
+  - lint
+  - test
+
+cache:
+  paths:
+    - .pip-cache/
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
+
+setup_environment:
+  stage: build
+  script:
+    - echo "Iniciando instalación..."
+    - python -m pip install --upgrade pip
+    - pip install -r requirements.txt
+  artifacts:
+    paths:
+      - .pip-cache/
+
+check_quality:
+  stage: lint
+  script:
+    - pip install flake8
+    - flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+  dependencies:
+    - setup_environment
+
+run_tests:
+  stage: test
+  script:
+    - pip install pytest
+    # AQUÍ ESTÁ EL CAMBIO: 'test/' en vez de 'tests/'
+    - pytest test/  
+  dependencies:
+    - setup_environment
