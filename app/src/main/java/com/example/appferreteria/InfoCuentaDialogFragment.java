@@ -5,16 +5,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
-
 import org.jspecify.annotations.NonNull;
-
-import java.util.List;
-
-import models.cliente;
-import models.venta;
-
-import mockdata.ventaFakeData;
-import mockdata.clienteFakeData;
 
 public class InfoCuentaDialogFragment extends DialogFragment {
 
@@ -23,9 +14,8 @@ public class InfoCuentaDialogFragment extends DialogFragment {
     private static final String ARG_FECHA_INICIO = "fechaInicio";
     private static final String ARG_CLIENTE_NOMBRE = "nombreCliente";
 
-
+    // Mantenemos el newInstance igual, ya que recibe los datos listos desde el Fragment padre
     public static InfoCuentaDialogFragment newInstance(int idCuenta, int idVenta, String fechaInicio, String nombreCliente){
-
         InfoCuentaDialogFragment fragment = new InfoCuentaDialogFragment();
         Bundle args = new Bundle();
 
@@ -44,36 +34,18 @@ public class InfoCuentaDialogFragment extends DialogFragment {
 
         Bundle args = getArguments();
 
+        // Recuperamos los datos que nos pasó CuentasPorCobrarFragment
         int idCuenta = args != null ? args.getInt(ARG_ID_CUENTA) : -1;
         int idVenta = args != null ? args.getInt(ARG_ID_VENTA) : -1;
         String fechaInicio = args != null ? args.getString(ARG_FECHA_INICIO) : "Sin Fecha";
-        String nombreCliente = args != null ? args.getString(ARG_CLIENTE_NOMBRE) : "Sin Cliente";
+        String nombreCliente = args != null ? args.getString(ARG_CLIENTE_NOMBRE) : "Desconocido";
 
+        // Construimos el mensaje directamente.
+        // NO es necesario volver a buscar en listas porque 'nombreCliente' ya viene calculado con datos reales.
         String mensaje = "Cliente: " + nombreCliente +
-                         "\nID de Cuenta: " + idCuenta +
-                         "\nID de Venta: " + idVenta +
-                         "\nFecha de Inicio: " + fechaInicio;
-
-        //Buscar venta
-        venta VentaEncontrada = null;
-        for(venta Venta : obtenerVentas()){
-            if(Venta.getIdVenta() == idVenta){
-                VentaEncontrada = Venta;
-                break;
-            }
-        }
-
-        //Buscar cliente
-        String NombreCliente = "Desconocido";
-        if(VentaEncontrada != null){
-            int idCliente = VentaEncontrada.getIdCliente();
-            for(cliente Cliente : obtenerClientes()){
-                if(Cliente.idCliente == idCliente){
-                    NombreCliente = Cliente.nombre;
-                    break;
-                }
-            }
-        }
+                "\nID de Cuenta: " + idCuenta +
+                "\nID de Venta: " + idVenta +
+                "\nFecha de Inicio: " + fechaInicio;
 
         return new AlertDialog.Builder(requireContext())
                 .setTitle("Información de Cuenta")
@@ -82,13 +54,6 @@ public class InfoCuentaDialogFragment extends DialogFragment {
                 .create();
     }
 
-    private List<venta> obtenerVentas(){
-        //CAMBIAR POR LO DEL API
-        return ventaFakeData.getVentas();
-    }
-
-    private List<cliente> obtenerClientes(){
-        //CAMBIAR POR LO DEL API
-        return clienteFakeData.getClientes();
-    }
+    // Se eliminaron los métodos 'obtenerVentas' y 'obtenerClientes'
+    // y sus imports porque ya no se necesitan.
 }

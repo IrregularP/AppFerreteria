@@ -30,7 +30,7 @@ public class CategoriaFragment extends Fragment {
     List<categoria> listaCategorias;
 
     // Ajusta la IP a la de tu servidor
-    private static final String BASE_URL = "http://192.168.1.99:5000/";
+    private static final String BASE_URL = "http://192.168.1.140:5000/";
 
     @Nullable
     @Override

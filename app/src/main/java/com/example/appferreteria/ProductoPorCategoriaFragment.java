@@ -27,7 +27,7 @@ public class ProductoPorCategoriaFragment extends Fragment {
     private static final String ARG_ID_CATEGORIA = "idCategoria";
 
     // IMPORTANTE: Asegúrate de usar la IP de tu servidor
-    private static final String BASE_URL = "http://192.168.1.99:5000/";
+    private static final String BASE_URL = "http://192.168.1.140:5000/";
 
     private int idCategoria;
     private RecyclerView recyclerView;

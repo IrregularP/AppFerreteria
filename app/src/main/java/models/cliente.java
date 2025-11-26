@@ -1,57 +1,25 @@
 package models;
 
+import com.google.gson.annotations.SerializedName; // <--- NO OLVIDAR
+
 public class cliente {
-    public int idCliente;
-    public String nombre;
-    public String direccion;
-    public String telefono;
-    public String email;
 
-    public cliente(int idCliente, String nombre, String direccion, String telefono, String email){
-        this.idCliente = idCliente;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.email = email;
-    }
+    @SerializedName("id_cliente") // <--- SI ESTE FALTA, EL ID ES 0
+    private int idCliente;
 
-    public int getIdCliente(){
-        return idCliente;
-    }
+    @SerializedName("nombre")
+    private String nombre;
 
-    public String getNombre(){
-        return nombre;
-    }
+    @SerializedName("direccion")
+    private String direccion;
 
-    public String getDireccion(){
-        return direccion;
-    }
+    // Constructor vacío
+    public cliente() {}
 
-    public String getTelefono(){
-        return telefono;
-    }
+    // Getters
+    public int getIdCliente() { return idCliente; }
+    public void setIdCliente(int idCliente) { this.idCliente = idCliente; }
 
-    public String getEmail(){
-        return email;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 }
