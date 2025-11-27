@@ -39,6 +39,7 @@ run_tests:
   script:
     - pip install -r requirements.txt
     - pip install pytest pytest-cov
+    - export PYTHONPATH=$PYTHONPATH:.
     - pytest --cov=. --cov-report term test/
   coverage: '/(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'
   dependencies:
